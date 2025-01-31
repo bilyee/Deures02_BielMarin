@@ -3,19 +3,24 @@ package com.exercicis;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class Exercici0200 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
+        
+        // Suma de numeros con concatenación
         System.out.println(addImaginaries("1+2i", "4+5i"));
 
+        // Dibujar y calcular triangulo de Pascal
         drawPascal(5);
 
+        // Sumar numeros dentro de un ArrayList
         ArrayList<Double> list = new ArrayList<>(Arrays.asList(1.5, 2.3, 3.7));
         System.out.println(addList(list));
 
+        // Imprimir una matriz
         int[][] matrixA = {
             {1, 2, 3},
             {4, 5, 6},
@@ -23,6 +28,7 @@ public class Exercici0200 {
         };
         printMatrix(matrixA);
 
+        // Imprimir y ordenar una matriz por columnas
         int[][] matrixB = {{1, 2, 3}, {4, 5, 6}};
         int[][] matrixC = {
             {1,  2,  3,  4,  5}, 
@@ -30,24 +36,29 @@ public class Exercici0200 {
             {11, 12, 13, 14, 15}, 
             {16, 17, 18, 19, 20}
         };
-
         printMatrix(transpose(matrixB));
         printMatrix(transpose(matrixC));
 
+        // Saber la primera letra que no se repite
         System.out.println(firstNonRepeated("swiss"));     // w
         System.out.println(firstNonRepeated("redivider")); // v
         System.out.println(firstNonRepeated("aabbcc"));    // _
 
+        // Invertir un numero
         System.out.println(inverInt(3645)); 
 
+        // Calculo del numero mas pequeño y el mas grande
         ArrayList<Integer> nums = new ArrayList<>(Arrays.asList(3, 6, 1, 5, 0));
         System.out.println(minMaxAdd(nums));
 
+        // Sumar numeros sin el operador de sumar
         System.out.println(sumaSenseSumar(5, 6) + ":" + sumaSenseSumar(-3, 3) + ":" + sumaSenseSumar(10, -4));
 
+        // Saber la distancia de cada letra
         System.out.println(minDistances("algoritmo", 'o'));
         System.out.println(minDistances("abcdefga", 'a'));
 
+        // Encuentra el numero que no se repite
         System.out.println(findUniqueNumber(new ArrayList<>(Arrays.asList(2.0, 2.0, 1.0))));
         System.out.println(findUniqueNumber(new ArrayList<>(Arrays.asList(4.0, 1.0, 2.0, 1.0, 2.0))));
 
@@ -72,7 +83,21 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testAddImaginariesLargeNumbers
      */
     public static String addImaginaries(String num0, String num1) {
-        return "";
+        String[] part0 = num0.split("\\+|i");
+
+        // Guardamos en variables los 2 numeros
+        Integer parte0 = Integer.parseInt(part0[0]);
+        Integer parte1 = Integer.parseInt(part0[1]);
+
+        String[] part1 = num1.split("\\+|i");
+
+        Integer parte2 = Integer.parseInt(part1[0]);
+        Integer parte3 = Integer.parseInt(part1[1]);
+
+        String suma1 = Integer.toString(parte0) + Integer.toString(parte2);
+        String suma2 = Integer.toString(parte1) + Integer.toString(parte3);
+
+        return suma1 + "+" + suma2 + "i";
     }
 
     /**
@@ -87,7 +112,38 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testDrawPascalFive
      */
     public static void drawPascal(int n) {
+        if (n < 1) {
+            return;
+        }
 
+        ArrayList<ArrayList<Integer>> pascal = new ArrayList<>();
+        pascal.add(new ArrayList<>(List.of(1))); // Primera fila siempre es [1]
+
+        // Hacemos un bucle para los calculos de cada linia del triangulo
+        for (int row = 1; row < n; row++) {
+            ArrayList<Integer> prevLine = pascal.get(row - 1);
+            ArrayList<Integer> nextLine = new ArrayList<>();
+            nextLine.add(1); // Primer elemento siempre es 1
+
+            for (int col = 1; col < prevLine.size(); col++) {
+                int sum = prevLine.get(col - 1) + prevLine.get(col);
+                nextLine.add(sum);
+            }
+
+            nextLine.add(1); // Ultimo elemento siempre es 1
+            pascal.add(nextLine);
+
+            // Imprimir el triangulo de Pascal correctamente
+            for (ArrayList<Integer> line : pascal) {
+                for (int i = 0; i < line.size(); i++) {
+                    System.out.print(line.get(i));
+                    if (i < line.size() - 1) {
+                        System.out.print(", ");
+                    }
+                }
+                System.out.println();
+            }
+        }
     }
 
     /**
