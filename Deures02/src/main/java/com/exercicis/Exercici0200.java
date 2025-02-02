@@ -2,6 +2,8 @@ package com.exercicis;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -160,7 +162,14 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testAddListDecimals
      */
     public static double addList(ArrayList<Double> list) {
-        return 0.0;
+        double sumaNumeros = 0.0; // Creamos una variable para almacenar la suma de los numeros
+
+        // Bucle para recorrer todos los numeros de la lista
+        for (double numero : list) {
+            sumaNumeros += numero; // Sumamos los numeros y almacenamos
+        }
+
+        return sumaNumeros; // Regresamos la suma
     }
 
     /** 
@@ -177,7 +186,13 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testPrintMatrixEmpty
      */
     public static void printMatrix(int[][] matrix) {
-
+        // Hacemos un bucle para acceder lista por lista a los numeros
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; i < matrix[i].length; j++) {
+                System.out.print(matrix[i][j] + ", "); // Imprimir los numeros con separacion
+            }
+            System.out.println(); // Salto de linea
+        }
     }
 
     /**
@@ -209,7 +224,26 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testTransposeSingleElement
      */
     public static int[][] transpose(int[][] matrix) {
-        return null;
+        int filas = matrix.length;
+        int columnas = matrix[0].length;
+
+        int[][] trasposada = new int[filas][columnas];
+
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                trasposada[j][i] = matrix[i][j];
+            }
+        }
+
+        System.out.println("Matriu Trasposada: ");
+        for (int i = 0; i < columnas; i++) {
+            for (int j = 0; j < filas; j++) {
+                System.out.println(trasposada[i][j] + ", ");
+            }
+            System.out.println();
+        }
+
+        return trasposada;
     }
 
     /**
@@ -233,7 +267,19 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testFirstNonRepeatedLongString
      */
     public static char firstNonRepeated(String str) {
-        return '_';
+        HashMap<Character, Integer> frecuencia = new HashMap<>(); // Creamos un HashMap para saber las frecuencias de cada letra
+
+        for (char letra : str.toCharArray()) {
+            frecuencia.put(letra, frecuencia.getOrDefault(letra, 0) + 1); // Si la letra se repite, vamos sumando la cantidad
+        }
+
+        for (char letra : str.toCharArray()) {
+            if (frecuencia.get(letra) == 0) { // Si la crecuencia de la letra es igual a 0, regresamos la letra
+                return letra;
+            }
+        }
+
+        return '_'; // Si no, regresamos un char para saber que todas se repiten
     }
 
     /**
@@ -248,7 +294,8 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testInverIntSingleDigit
      */
     public static int inverInt(int num) {
-        return 0;
+        String invertidoStr = new StringBuilder(String.valueOf(num)).reverse().toString();
+        return Integer.parseInt(invertidoStr);
     }
 
     /**
@@ -273,7 +320,23 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testMinMaxAddWithDuplicates
      */
     public static ArrayList<Integer> minMaxAdd(ArrayList<Integer> nums) {
-        return null;
+        int petit = 0;
+        int gran = 0;
+
+        // Ordenamos la lista de menos a mayor
+        nums.sort(Integer::compareTo);
+
+        // Sumamos los 4 números más grandes
+        for (int i = 0; i < nums.size(); i++) {
+            gran += nums.get(i);
+        }
+
+        // Sumamos los 4 numeros mas pequeños
+        for (int i = 1; i < nums.size(); i++) { // Empezamos en 1 para omitir el menor
+            petit += nums.get(i);
+        }
+
+        return new ArrayList<>(Arrays.asList(petit, gran));
     }
 
     /**
@@ -299,7 +362,11 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testSumaSenseSumarLargeNumbers
      */
     public static int sumaSenseSumar(int a, int b) {
-        return 0;
+        String aR = "x".repeat(a);
+        String bR = "y".repeat(b);
+        Integer suma = aR.concat(bR).length();
+        
+        return suma;
     }
 
     /**
@@ -323,7 +390,31 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testMinDistancesNoTargetFound
      */
     public static ArrayList<Integer> minDistances(String text, char target) {
-        return null;
+        int n = text.length();
+        ArrayList<Integer> distances = new ArrayList<>(Collections.nCopies(n, Integer.MAX_VALUE));
+        
+        int lastTargetPos = -1;
+        for (int i = 0; i < n; i++) {
+            if (text.charAt(i) == target) {
+                lastTargetPos = i; // Si encuentra la letra asignada, actualiza la variable con la posicion
+            }
+            if (lastTargetPos != -1) {
+                distances.set(i, i - lastTargetPos); // Calculamos la distancia de cada posición (posicion letra - posicion target)
+            }
+        }
+
+        // Recorrido de derecha a izquierda
+        lastTargetPos = -1;
+        for (int i = n - 1; i >= 0; i--) {
+            if (text.charAt(i) == target) {
+                lastTargetPos = i; // Si encuentra la letra asignada, actualiza la variable con la posicion
+            }
+            if (lastTargetPos != -1) {
+                distances.set(i, Math.min(distances.get(i), lastTargetPos - i)); // Se hace el mismo calculo que antes, pero esta vez nos quedamos con el numero mas pequeño
+            }
+        }
+
+        return distances;
     }
 
     /**
