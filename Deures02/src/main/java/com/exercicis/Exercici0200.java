@@ -96,26 +96,15 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testAddImaginariesLargeNumbers
      */
     public static String addImaginaries(String num0, String num1) {
-        // Dividimos los numeros
-        String[] part0 = num0.split("\\+|i");
-
-        // Guardamos en variables los 2 numeros
-        Integer parte0 = Integer.parseInt(part0[0]);
-        Integer parte1 = Integer.parseInt(part0[1]);
-
-        // Dividimos de nuevo los otros numeros
-        String[] part1 = num1.split("\\+|i");
-
-        // Guardamos en variables los 2 numeros
-        Integer parte2 = Integer.parseInt(part1[0]);
-        Integer parte3 = Integer.parseInt(part1[1]);
-
-        // Hacemos 2 variable para sumar los primeros numeros de cada parte
-        String suma1 = Integer.toString(parte0) + Integer.toString(parte2);
-        String suma2 = Integer.toString(parte1) + Integer.toString(parte3);
-
-        return suma1 + "+" + suma2 + "i"; // Regresamos las sumas con el formato indicado
-    }
+        // Extraer las partes reales e imaginarias
+        String[] part0 = num0.replace("i", "").split("\\+");
+        String[] part1 = num1.replace("i", "").split("\\+");
+    
+        int realSum = Integer.parseInt(part0[0]) + Integer.parseInt(part1[0]);
+        int imagSum = Integer.parseInt(part0[1]) + Integer.parseInt(part1[1]);
+    
+        return realSum + "+" + imagSum + "i";
+    }    
 
     /**
      * Fes un programa que dibuixi el triangle de pascal
@@ -129,39 +118,28 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testDrawPascalFive
      */
     public static void drawPascal(int n) {
-        if (n < 1) {
-            return;
-        }
-
+        if (n < 1) return;
+    
         ArrayList<ArrayList<Integer>> pascal = new ArrayList<>();
-        pascal.add(new ArrayList<>(List.of(1))); // Primera fila siempre es [1]
-
-        // Hacemos un bucle para los calculos de cada linia del triangulo
+        pascal.add(new ArrayList<>(List.of(1)));
+    
         for (int row = 1; row < n; row++) {
             ArrayList<Integer> prevLine = pascal.get(row - 1);
             ArrayList<Integer> nextLine = new ArrayList<>();
-            nextLine.add(1); // Primer elemento siempre es 1
-
+            nextLine.add(1);
+    
             for (int col = 1; col < prevLine.size(); col++) {
-                int sum = prevLine.get(col - 1) + prevLine.get(col);
-                nextLine.add(sum);
+                nextLine.add(prevLine.get(col - 1) + prevLine.get(col));
             }
-
-            nextLine.add(1); // Ultimo elemento siempre es 1
+    
+            nextLine.add(1);
             pascal.add(nextLine);
-
-            // Imprimir el triangulo de Pascal correctamente
-            for (ArrayList<Integer> line : pascal) {
-                for (int i = 0; i < line.size(); i++) {
-                    System.out.print(line.get(i));
-                    if (i < line.size() - 1) {
-                        System.out.print(", ");
-                    }
-                }
-                System.out.println();
-            }
         }
-    }
+    
+        for (ArrayList<Integer> line : pascal) {
+            System.out.println(line);
+        }
+    }    
 
     /**
      * Fes una funció que sumi els valors d'un ArrayList<double>
@@ -242,30 +220,19 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testTransposeSingleElement
      */
     public static int[][] transpose(int[][] matrix) {
-        int filas = matrix.length; // Calculamos la longitud de filas en la matriz
-        int columnas = matrix[0].length; // Calculamos la longitud de columnas en la matriz
-
-        int[][] trasposada = new int[filas][columnas]; // Guardamos una copia de la matriz
-
-        // Recorremos con un bucle las filas y columnas
+        int filas = matrix.length;
+        int columnas = matrix[0].length;
+    
+        int[][] transpuesta = new int[columnas][filas];
+    
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
-                trasposada[j][i] = matrix[i][j]; // Intercambiamos las filas por columnas, y columnas por filas
+                transpuesta[j][i] = matrix[i][j];
             }
         }
-
-        for (int[] row : trasposada) {
-            for (int i = 0; i < row.length; i++) {
-                System.out.print(row[i]);
-                if (i < row.length - 1) {
-                    System.out.print(", ");
-                }
-            }
-            System.out.println();
-        }
-
-        return trasposada; // Regresamos matriz ordenada por columnas
-    }
+    
+        return transpuesta;
+    }    
 
     /**
      * Fes una funció que troba el primer caràcter que
@@ -288,20 +255,21 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testFirstNonRepeatedLongString
      */
     public static char firstNonRepeated(String str) {
-        HashMap<Character, Integer> frecuencia = new HashMap<>(); // Creamos un HashMap para saber las frecuencias de cada letra
-
+        HashMap<Character, Integer> frecuencia = new HashMap<>();
+    
         for (char letra : str.toCharArray()) {
-            frecuencia.put(letra, frecuencia.getOrDefault(letra, 0) + 1); // Si la letra se repite, vamos sumando la cantidad
+            frecuencia.put(letra, frecuencia.getOrDefault(letra, 0) + 1);
         }
-
+    
         for (char letra : str.toCharArray()) {
-            if (frecuencia.get(letra) == 0) { // Si la crecuencia de la letra es igual a 0, regresamos la letra
+            if (frecuencia.get(letra) == 1) {
                 return letra;
             }
         }
-
-        return '_'; // Si no, regresamos un char para saber que todas se repiten
+    
+        return '_';
     }
+    
 
     /**
      * Fes una funció que inverteixi els caràcters
@@ -342,24 +310,11 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testMinMaxAddWithDuplicates
      */
     public static ArrayList<Integer> minMaxAdd(ArrayList<Integer> nums) {
-        int petit = 0;
-        int gran = 0;
-
-        // Ordenamos la lista de menos a mayor
-        nums.sort(Integer::compareTo);
-
-        // Sumamos los 4 números más grandes
-        for (int i = 0; i < nums.size(); i++) {
-            gran += nums.get(i);
-        }
-
-        // Sumamos los 4 numeros mas pequeños
-        for (int i = 1; i < nums.size(); i++) { // Empezamos en 1 para omitir el menor
-            petit += nums.get(i);
-        }
-
-        return new ArrayList<>(Arrays.asList(petit, gran));
-    }
+        Collections.sort(nums);
+        int minSum = nums.get(0) + nums.get(1) + nums.get(2) + nums.get(3);
+        int maxSum = nums.get(1) + nums.get(2) + nums.get(3) + nums.get(4);
+        return new ArrayList<>(Arrays.asList(minSum, maxSum));
+    }    
 
     /**
      * Fes una funció que sumi dos números sense fer servir 
