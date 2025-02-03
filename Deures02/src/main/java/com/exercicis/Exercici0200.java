@@ -14,13 +14,16 @@ public class Exercici0200 {
         
         // Suma de numeros con concatenación
         System.out.println(addImaginaries("1+2i", "4+5i"));
-
+        System.out.println("-".repeat(30));
+        
         // Dibujar y calcular triangulo de Pascal
         drawPascal(5);
+        System.out.println("-".repeat(30));
 
         // Sumar numeros dentro de un ArrayList
         ArrayList<Double> list = new ArrayList<>(Arrays.asList(1.5, 2.3, 3.7));
         System.out.println(addList(list));
+        System.out.println("-".repeat(30));
 
         // Imprimir una matriz
         int[][] matrixA = {
@@ -29,6 +32,7 @@ public class Exercici0200 {
             {7, 8, 9}
         };
         printMatrix(matrixA);
+        System.out.println("-".repeat(30));
 
         // Imprimir y ordenar una matriz por columnas
         int[][] matrixB = {{1, 2, 3}, {4, 5, 6}};
@@ -40,29 +44,36 @@ public class Exercici0200 {
         };
         printMatrix(transpose(matrixB));
         printMatrix(transpose(matrixC));
+        System.out.println("-".repeat(30));
 
         // Saber la primera letra que no se repite
         System.out.println(firstNonRepeated("swiss"));     // w
         System.out.println(firstNonRepeated("redivider")); // v
         System.out.println(firstNonRepeated("aabbcc"));    // _
+        System.out.println("-".repeat(30));
 
         // Invertir un numero
         System.out.println(inverInt(3645)); 
+        System.out.println("-".repeat(30));
 
         // Calculo del numero mas pequeño y el mas grande
         ArrayList<Integer> nums = new ArrayList<>(Arrays.asList(3, 6, 1, 5, 0));
         System.out.println(minMaxAdd(nums));
+        System.out.println("-".repeat(30));
 
         // Sumar numeros sin el operador de sumar
         System.out.println(sumaSenseSumar(5, 6) + ":" + sumaSenseSumar(-3, 3) + ":" + sumaSenseSumar(10, -4));
+        System.out.println("-".repeat(30));
 
         // Saber la distancia de cada letra
         System.out.println(minDistances("algoritmo", 'o'));
         System.out.println(minDistances("abcdefga", 'a'));
+        System.out.println("-".repeat(30));
 
         // Encuentra el numero que no se repite
         System.out.println(findUniqueNumber(new ArrayList<>(Arrays.asList(2.0, 2.0, 1.0))));
         System.out.println(findUniqueNumber(new ArrayList<>(Arrays.asList(4.0, 1.0, 2.0, 1.0, 2.0))));
+        System.out.println("-".repeat(30));
 
         scanner.close();
     }
@@ -85,21 +96,25 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testAddImaginariesLargeNumbers
      */
     public static String addImaginaries(String num0, String num1) {
+        // Dividimos los numeros
         String[] part0 = num0.split("\\+|i");
 
         // Guardamos en variables los 2 numeros
         Integer parte0 = Integer.parseInt(part0[0]);
         Integer parte1 = Integer.parseInt(part0[1]);
 
+        // Dividimos de nuevo los otros numeros
         String[] part1 = num1.split("\\+|i");
 
+        // Guardamos en variables los 2 numeros
         Integer parte2 = Integer.parseInt(part1[0]);
         Integer parte3 = Integer.parseInt(part1[1]);
 
+        // Hacemos 2 variable para sumar los primeros numeros de cada parte
         String suma1 = Integer.toString(parte0) + Integer.toString(parte2);
         String suma2 = Integer.toString(parte1) + Integer.toString(parte3);
 
-        return suma1 + "+" + suma2 + "i";
+        return suma1 + "+" + suma2 + "i"; // Regresamos las sumas con el formato indicado
     }
 
     /**
@@ -187,11 +202,14 @@ public class Exercici0200 {
      */
     public static void printMatrix(int[][] matrix) {
         // Hacemos un bucle para acceder lista por lista a los numeros
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; i < matrix[i].length; j++) {
-                System.out.print(matrix[i][j] + ", "); // Imprimir los numeros con separacion
+        for (int[] row : matrix) {
+            for (int i = 0; i < row.length; i++) {
+                System.out.print(row[i]);
+                if (i < row.length - 1) {
+                    System.out.print(", ");
+                }
             }
-            System.out.println(); // Salto de linea
+            System.out.println();
         }
     }
 
@@ -224,26 +242,29 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testTransposeSingleElement
      */
     public static int[][] transpose(int[][] matrix) {
-        int filas = matrix.length;
-        int columnas = matrix[0].length;
+        int filas = matrix.length; // Calculamos la longitud de filas en la matriz
+        int columnas = matrix[0].length; // Calculamos la longitud de columnas en la matriz
 
-        int[][] trasposada = new int[filas][columnas];
+        int[][] trasposada = new int[filas][columnas]; // Guardamos una copia de la matriz
 
+        // Recorremos con un bucle las filas y columnas
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
-                trasposada[j][i] = matrix[i][j];
+                trasposada[j][i] = matrix[i][j]; // Intercambiamos las filas por columnas, y columnas por filas
             }
         }
 
-        System.out.println("Matriu Trasposada: ");
-        for (int i = 0; i < columnas; i++) {
-            for (int j = 0; j < filas; j++) {
-                System.out.println(trasposada[i][j] + ", ");
+        for (int[] row : trasposada) {
+            for (int i = 0; i < row.length; i++) {
+                System.out.print(row[i]);
+                if (i < row.length - 1) {
+                    System.out.print(", ");
+                }
             }
             System.out.println();
         }
 
-        return trasposada;
+        return trasposada; // Regresamos matriz ordenada por columnas
     }
 
     /**
@@ -294,8 +315,9 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testInverIntSingleDigit
      */
     public static int inverInt(int num) {
+        // Convertimos el numero a String y utilizamos "reverse()" para darle la vuelta
         String invertidoStr = new StringBuilder(String.valueOf(num)).reverse().toString();
-        return Integer.parseInt(invertidoStr);
+        return Integer.parseInt(invertidoStr); // Devolvemos el numero al reves convertido a entero
     }
 
     /**
@@ -362,11 +384,11 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testSumaSenseSumarLargeNumbers
      */
     public static int sumaSenseSumar(int a, int b) {
-        String aR = "x".repeat(a);
-        String bR = "y".repeat(b);
-        Integer suma = aR.concat(bR).length();
+        String aR = "x".repeat(a); // Ponemos tantas "x" como cantidad sea
+        String bR = "y".repeat(b); // Ponemos tantas "y" como cantidad sea
+        Integer suma = aR.concat(bR).length(); // Concatenamos las dos sentencias de caracteres y calculamos su longitud
         
-        return suma;
+        return suma; // Regresamos la suma
     }
 
     /**
@@ -393,6 +415,7 @@ public class Exercici0200 {
         int n = text.length();
         ArrayList<Integer> distances = new ArrayList<>(Collections.nCopies(n, Integer.MAX_VALUE));
         
+        // Recorrido de izquierda a derecha
         int lastTargetPos = -1;
         for (int i = 0; i < n; i++) {
             if (text.charAt(i) == target) {
@@ -438,6 +461,25 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0000#testFindUniqueNumberNoUnique
      */
     public static Double findUniqueNumber(ArrayList<Double> nums) {
+        HashMap<Double, Integer> frecuencia = new HashMap<>(); // Hashmap para almacenar la frecuencia de numeros
+
+        // Recorremos la lista para contar cada vez aparece un numero
+        for (Double num : nums) {
+            if (frecuencia.containsKey(num)) {
+                frecuencia.put(num, frecuencia.get(num) + 1); // Si el numero ya aparece, incrementamos el contador
+            } else {
+                frecuencia.put(num, 1); // Si no aparece, le añadimos frecuencia de 1
+            }
+        }
+
+        // Buscar el numero que aparece una vez
+        for (HashMap.Entry<Double, Integer> entry : frecuencia.entrySet()) {
+            if (entry.getValue() == 1) { // Si la frecuencia es 1, es numero unico
+                return entry.getKey();
+            }
+        }
+
+        // Si no se encuentra ningun numero, devolver null
         return null;
     }
 }
