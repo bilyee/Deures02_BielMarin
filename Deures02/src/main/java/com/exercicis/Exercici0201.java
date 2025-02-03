@@ -80,6 +80,28 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testMostraArrayEstadistiques
      */
     public static void mostraArrayEstadistiques(int[] array) {
+        Integer maximo = Integer.MIN_VALUE;
+        Integer minimo = Integer.MAX_VALUE;
+        double media = 0.0;
+
+        for (int valor : array) {
+            media += valor;
+            if (valor > maximo) {
+                maximo = valor;
+            } if (valor < minimo) {
+                minimo = valor;
+            }
+        }
+        media = media / array.length;
+
+        System.out.print("Array: [");
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
+            if (i < array.length - 1)
+                System.out.print(", ");
+        }
+        System.out.println("]");
+        System.out.println("Màxim: " + maximo + "  Mínim: " + minimo + "  Mitjana: " + media);
     }
 
     /**
@@ -91,7 +113,13 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraLlistaEnters
      */
     public static ArrayList<Integer> generaLlistaEnters(int mida) {
-        ArrayList<Integer> rst = new ArrayList<>();
+        ArrayList<Integer> rst = new ArrayList<>(mida);
+        Random random = new Random();
+
+        for (int i = 0; i < mida; i++) {
+            rst.add(random.nextInt(100));
+        }
+
         return rst;
     }
 
@@ -109,7 +137,30 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testMostraLlistaEstadistiques
      */
     public static void mostraLlistaEstadistiques(ArrayList<Integer> llista) {
+        Integer maxim = Integer.MIN_VALUE;
+        Integer minimo = Integer.MAX_VALUE;
+        double total = 0.0;
 
+        for (Integer valor : llista) {
+            total += valor;
+            if (valor > maxim) {
+                maxim = valor;
+            }
+            if (valor < minimo) {
+                minimo = valor;
+            }
+        }
+        total = total / llista.size();
+
+        System.out.print("Llista: [");
+        for (int i = 0; i < llista.size(); i++) {
+            System.out.print(llista.get(i));
+            if (i < llista.size() - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        System.out.println("Màxim: " + maxim + "  Mínim: " + minimo + "  Mitjana: " + total);
     }
 
     /**
