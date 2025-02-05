@@ -60,12 +60,12 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraArrayEnters
      */
     public static int[] generaArrayEnters(int mida) {
-        int[] rst = new int[mida];
-        Random generador = new Random();
+        int[] rst = new int[mida]; // Creamos un Array con la medida que introduzcamos
+        Random generador = new Random(); // Llamamos a la funcion Random
 
-        mida = generador.nextInt(100);
+        mida = generador.nextInt(100); // Introducimos tantos numeros como medida hayamos dicho
         
-        return rst;
+        return rst; // Regresamos el Array
     }
 
     /**
@@ -80,27 +80,30 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testMostraArrayEstadistiques
      */
     public static void mostraArrayEstadistiques(int[] array) {
-        Integer maximo = Integer.MIN_VALUE;
-        Integer minimo = Integer.MAX_VALUE;
-        double media = 0.0;
+        Integer maximo = Integer.MIN_VALUE; // Variable para almacenar el numero max
+        Integer minimo = Integer.MAX_VALUE; // Variable para almacenar el numero min
+        double media = 0.0; // Calcular la media
 
+        // Bucle para saber los valores de Max y Min
         for (int valor : array) {
-            media += valor;
+            media += valor; // Sumamos los numeros a la variable
             if (valor > maximo) {
-                maximo = valor;
+                maximo = valor; // Si el valor es mayor a la variable maximo, lo almacenamos
             } if (valor < minimo) {
-                minimo = valor;
+                minimo = valor; // Si el valor es menor a la variable minimo, lo almacenamos
             }
         }
-        media = media / array.length;
+        media = media / array.length; // Con la suma total de los numeros, lo dividimos con la longitud del Array
 
-        System.out.print("Array: [");
+        // Bucle para imprimir los numeros uno por uno con separacion
+        System.out.print("Array: ["); 
         for (int i = 0; i < array.length; i++) {
             System.out.print(array[i]);
             if (i < array.length - 1)
                 System.out.print(", ");
         }
         System.out.println("]");
+        // Imprimimos el maximo, el minimo y la media
         System.out.println("Màxim: " + maximo + "  Mínim: " + minimo + "  Mitjana: " + media);
     }
 
@@ -113,14 +116,15 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraLlistaEnters
      */
     public static ArrayList<Integer> generaLlistaEnters(int mida) {
-        ArrayList<Integer> rst = new ArrayList<>(mida);
-        Random random = new Random();
+        ArrayList<Integer> rst = new ArrayList<>(mida); // ArrayList para generar numeros enteros aleatorios
+        Random random = new Random(); // Llamamos a la funcion Random
 
+        // Bucle para introducir los numeros random dependiendo de la mida
         for (int i = 0; i < mida; i++) {
             rst.add(random.nextInt(100));
         }
 
-        return rst;
+        return rst; // Regresamos el ArrayList
     }
 
     /**
@@ -137,21 +141,23 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testMostraLlistaEstadistiques
      */
     public static void mostraLlistaEstadistiques(ArrayList<Integer> llista) {
-        Integer maxim = Integer.MIN_VALUE;
-        Integer minimo = Integer.MAX_VALUE;
-        double total = 0.0;
+        Integer maxim = Integer.MIN_VALUE; // Variable para almacenar el numero Max
+        Integer minimo = Integer.MAX_VALUE; // Variable para almacenar el numero Min
+        double total = 0.0; // Variable para calcular la media
 
+        // Bucle para saber los valores Max, Min y su media
         for (Integer valor : llista) {
-            total += valor;
+            total += valor; // Sumamos el valor a la variable total
             if (valor > maxim) {
-                maxim = valor;
+                maxim = valor; // Si el valor es mayor a la variable maxim, lo almacenamos
             }
             if (valor < minimo) {
-                minimo = valor;
+                minimo = valor; // Si el valor es menor a la variable minim, lo almacenamos
             }
         }
-        total = total / llista.size();
+        total = total / llista.size(); // Con la suma de los valores, dividimos con la longitud de la lista
 
+        // Bucle para mostrar numero por numero con separacion
         System.out.print("Llista: [");
         for (int i = 0; i < llista.size(); i++) {
             System.out.print(llista.get(i));
@@ -160,6 +166,7 @@ public class Exercici0201 {
             }
         }
         System.out.println("]");
+        // Mostramos el maximo, el minimo y la media
         System.out.println("Màxim: " + maxim + "  Mínim: " + minimo + "  Mitjana: " + total);
     }
 
@@ -176,26 +183,33 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraArrayParaulesAmbA
      */
     public static void filtraArrayParaulesAmbA() {
+        // Introducimos las 5 palabras con separacion
         System.out.println("Escriu 5 paraules separades per ',' o ', ': ");
         String input = scanner.nextLine();
 
+        // Remplacamos y dividimos las comas con separacion por comas normales
         String[] paraules = input.replace(", ", ",").split(",");
-        int count = 0;
+        int count = 0; // Variable para tener cuenta de las palabras que empiezan por 'a'
+        
+        // Bucle para buscar las palabras que empiezan por 'a'
         for (String p : paraules) {
             if (p.toLowerCase().startsWith("a")) {
-                count++;
+                count++; // Si la palabra empieza por 'a', aumentamos el contador
             }
         }
 
+        // Creamos Array con capacidad del contador para almacenar las palabras
         String[] filtrades = new String[count];
         int index = 0;
+
+        // Bucle para buscar las palabras que empiezan por 'a'
         for (String p : paraules) {
             if (p.toLowerCase().startsWith("a")) {
-                filtrades[index++] = p;
+                filtrades[index++] = p; // Si la palabra empieza por 'a', la almacenamos en el Array
             }
         }
-        String rst = String.join(",", filtrades);
-        System.out.println("Paraules que començen amb 'a': " + rst);
+        String rst = String.join(",", filtrades); // Unimos las palabras en el Array con un ',' de separador
+        System.out.println("Paraules que començen amb 'a': " + rst); // Mostramos las palabras
     }
        
     /**
@@ -211,21 +225,25 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraLlistaParaulesAmbA
      */
     public static void filtraLlistaParaulesAmbA() {
+        // Introducimos las 5 palabras con separacion
         System.out.println("Escriu 5 paraules separades per ',' o ', ': ");
         String input = scanner.nextLine();
 
+        // Remplazamos y dividimos las comas por separacion por comas normales
         String[] paraulesArray = input.replace(", ", ",").split(",");
+        // Creamos un ArrayList con las palabras y otro vacio para almacenar
         ArrayList<String> paraules = new ArrayList<>(Arrays.asList(paraulesArray));
         ArrayList<String> filtrades = new ArrayList<>();
 
+        // Bucle para buscar las palabras que empiezan por 'a'
         for (String p : paraules) {
             if (p.toLowerCase().startsWith("a")) {
-                filtrades.add(p);
+                filtrades.add(p); // Si la palabra empieza por 'a', la almacenamos en el ArrayList
             }
         }
 
-        String rst = String.join(", ", filtrades);
-        System.out.println("Paraules que comencen amb 'a': " + rst);
+        String rst = String.join(", ", filtrades); // Juntamos las palabras con una ',' de separación
+        System.out.println("Paraules que comencen amb 'a': " + rst); // Mostramos las palabras
     }
 
     /**
@@ -255,6 +273,10 @@ public class Exercici0201 {
      */
     public static ArrayList<Double> generaLlistaDecimals(int mida) {
         ArrayList<Double> rst = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < mida; i++) {
+            rst.add(random.nextDouble() * 100);
+        }
         return rst;
     }
 
@@ -273,8 +295,39 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraLlistaDecimals
      */
     public static void filtraArrayDecimalsSuperiors50(double[] decimals) {
+        System.out.println("Array original: [");
+        for (int i = 0; i < decimals.length; i++) {
+            System.out.printf("%.2f", decimals[i]);
+            if (i < decimals.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
 
-    }   
+        int count = 0;
+        for (double decimal : decimals) {
+            if (decimal > 50) {
+                count++;
+            }
+        }
+        double[] filtrats = new double[count];
+        int index = 0;
+        for (double decimal : decimals) {
+            if (decimal > 50) {
+                filtrats[index++] = decimal;
+            }
+        }
+
+        System.out.println("Valors majors que 50 [");
+        for (int i = 0; i < filtrats.length; i++) {
+            System.out.printf("%.2f", filtrats[i]);
+            if (i < decimals.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
+
 
     /**
      * Filtra i mostra els decimals superiors a 50 d'una llista.
@@ -290,7 +343,32 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraLlistaDecimalsSuperiors50
      */
     public static void filtraLlistaDecimalsSuperiors50(ArrayList<Double> decimals) {
+        String original = "[";
+        for (int i = 0; i < decimals.size(); i++) {
+            original += String.format("%.2f", decimals.get(i));
+            if (i < decimals.size() - 1) {
+                original += ", ";
+            }
+        }
+        original += "]";
+        System.out.println("Llista original: " + original);
 
+        ArrayList<Double> filtrats = new ArrayList<>();
+        for (Double decimal : decimals) {
+            if (decimal > 50) {
+                filtrats.add(decimal);
+            }
+        }
+
+        String filtrada = "[";
+        for (int i = 0; i < filtrats.size(); i++) {
+            filtrada += String.format("%.2f", filtrats.get(i));
+            if (i < filtrats.size() - 1) {
+                filtrada += ", ";
+            }
+        }
+        filtrada += "]";
+        System.out.println("Valors majors que 50: " + filtrada);
     }
     
     /**
@@ -304,7 +382,11 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testMostrarLlistaOrdenadesPerEdat
      */
     public static void mostrarLlistaOrdenadesPerEdat(HashMap<String, Integer> persones) {
-
+        ArrayList<String> keys = new ArrayList<>(persones.keySet());
+        keys.sort((k1, k2) -> persones.get(k1).compareTo(persones.get(k2)));
+        for (String key : keys) {
+            System.out.println(key + " (" + persones.get(key) + ")");
+        }
     }
 
     /**
@@ -320,7 +402,15 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testMostrarFrecuenciaParaules
      */
     public static void mostrarFrecuenciaParaules() {
-
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Introdueix una frase: ");
+        String input = scanner.nextLine().trim();
+        String[] paraules = input.split("\\s+");
+        HashMap<String, Integer> frecuencia = new HashMap<>();
+        for (String paraula : paraules) {
+            frecuencia.put(paraula, frecuencia.getOrDefault(paraula, 0) + 1);
+        }
+        System.out.println("Freqüència de paraules: " + frecuencia);
     }
 
     /**
