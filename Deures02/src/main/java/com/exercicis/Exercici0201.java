@@ -255,12 +255,15 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraArrayDecimals
      */
     public static double[] generaArrayDecimals(int mida) {
-        double[] rst = new double[mida];
-        Random random = new Random();
+        double[] rst = new double[mida]; // Creamos un Array con la mida que hemos introducido
+        Random random = new Random(); // Llamamos a la función de Random
+        
+        // Bucle para acceder al Array e introducir los decimales aleatorios
         for (int i = 0; i < mida; i++) {
             rst[i] = random.nextDouble() * 100;
         }
-        return rst;
+
+        return rst; // Regresamos el Array
     }
 
     /**
@@ -272,12 +275,15 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraArrayDecimalsSuperiors50
      */
     public static ArrayList<Double> generaLlistaDecimals(int mida) {
-        ArrayList<Double> rst = new ArrayList<>();
-        Random random = new Random();
+        ArrayList<Double> rst = new ArrayList<>(); // Creamos un ArrayList para introducir los decimales
+        Random random = new Random(); // Llamamos a la función de Random
+
+        // Bucle para acceder al ArrayList e introducir los decimales aleatorios
         for (int i = 0; i < mida; i++) {
             rst.add(random.nextDouble() * 100);
         }
-        return rst;
+
+        return rst; // Regresamos el ArrayList
     }
 
     /**
@@ -295,6 +301,7 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraLlistaDecimals
      */
     public static void filtraArrayDecimalsSuperiors50(double[] decimals) {
+        // Bucle para acceder a los valores y mostrarlos uno por uno con separación
         System.out.println("Array original: [");
         for (int i = 0; i < decimals.length; i++) {
             System.out.printf("%.2f", decimals[i]);
@@ -304,20 +311,24 @@ public class Exercici0201 {
         }
         System.out.println("]");
 
-        int count = 0;
+        int count = 0; // Contador para aumentar si hay un numero mayor a 50
+        // Bucle para acceder valor por valor
         for (double decimal : decimals) {
             if (decimal > 50) {
-                count++;
-            }
-        }
-        double[] filtrats = new double[count];
-        int index = 0;
-        for (double decimal : decimals) {
-            if (decimal > 50) {
-                filtrats[index++] = decimal;
+                count++; // Aumentamos el contador
             }
         }
 
+        double[] filtrats = new double[count]; // Array para almacenar los valores mayores a 50
+        int index = 0;
+        // Bucle para acceder valor por valor
+        for (double decimal : decimals) {
+            if (decimal > 50) {
+                filtrats[index++] = decimal; // Almacenamos en el Array el numero mayor a 50
+            }
+        }
+
+        // Bucle para acceder a los valores y mostrarlos uno por uno con separación
         System.out.println("Valors majors que 50 [");
         for (int i = 0; i < filtrats.length; i++) {
             System.out.printf("%.2f", filtrats[i]);
@@ -343,6 +354,7 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraLlistaDecimalsSuperiors50
      */
     public static void filtraLlistaDecimalsSuperiors50(ArrayList<Double> decimals) {
+        // Bucle para acceder a los valores uno por uno y mostrarlos con separación
         String original = "[";
         for (int i = 0; i < decimals.size(); i++) {
             original += String.format("%.2f", decimals.get(i));
@@ -353,13 +365,16 @@ public class Exercici0201 {
         original += "]";
         System.out.println("Llista original: " + original);
 
+        // Creamos un ArrayList para almacenar los numeros mayores a 50
         ArrayList<Double> filtrats = new ArrayList<>();
+        // Bucle para acceder y ver si hay valores mayores a 50
         for (Double decimal : decimals) {
             if (decimal > 50) {
                 filtrats.add(decimal);
             }
         }
 
+        // Bucle para acceder a los valores uno por uno y mostrarlos con separación
         String filtrada = "[";
         for (int i = 0; i < filtrats.size(); i++) {
             filtrada += String.format("%.2f", filtrats.get(i));
@@ -368,7 +383,7 @@ public class Exercici0201 {
             }
         }
         filtrada += "]";
-        System.out.println("Valors majors que 50: " + filtrada);
+        System.out.println("Valors majors que 50: " + filtrada); // Mostramos los valores mayores a 50
     }
     
     /**
@@ -382,8 +397,12 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testMostrarLlistaOrdenadesPerEdat
      */
     public static void mostrarLlistaOrdenadesPerEdat(HashMap<String, Integer> persones) {
+        // ArrayList con las Keys del HashMap
         ArrayList<String> keys = new ArrayList<>(persones.keySet());
+
+        // Vamos comparando uno por uno la edad de cada persona
         keys.sort((k1, k2) -> persones.get(k1).compareTo(persones.get(k2)));
+        // Creamos un bucle para mostrar los datos ordenados por edad
         for (String key : keys) {
             System.out.println(key + " (" + persones.get(key) + ")");
         }
@@ -403,13 +422,16 @@ public class Exercici0201 {
      */
     public static void mostrarFrecuenciaParaules() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Introdueix una frase: ");
+        System.out.println("Introdueix una frase: "); // Introducimos una frase
         String input = scanner.nextLine().trim();
-        String[] paraules = input.split("\\s+");
+        String[] paraules = input.split("\\s+"); // Separamos las palabras y las almacenamos en el Array
+
+        // Creamos el HashMap y vamos introduciendo cada palabra con su respectiva frecuencia en la palabra
         HashMap<String, Integer> frecuencia = new HashMap<>();
         for (String paraula : paraules) {
             frecuencia.put(paraula, frecuencia.getOrDefault(paraula, 0) + 1);
         }
+        // Mostramos las frecuencias de cada palabra en la frase
         System.out.println("Freqüència de paraules: " + frecuencia);
     }
 
