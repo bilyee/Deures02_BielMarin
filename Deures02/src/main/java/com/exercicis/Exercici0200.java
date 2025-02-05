@@ -88,7 +88,7 @@ public class Exercici0200 {
      * @return String el resultat de la suma
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0200#testAddImaginariesSimple
-     * @test ./runTest.sh com.exercicis.TestExercici0200#testAddImaginariesNegative
+     * @test ./runTest.sh com.exercicis.TestExercici0200#testAddImaginariesSimple
      * @test ./runTest.sh com.exercicis.TestExercici0200#testAddImaginariesZero
      * @test ./runTest.sh com.exercicis.TestExercici0200#testAddImaginariesWithZeroRealPart
      * @test ./runTest.sh com.exercicis.TestExercici0200#testAddImaginariesWithZeroImaginaryPart
@@ -136,7 +136,7 @@ public class Exercici0200 {
         }
     
         for (ArrayList<Integer> line : pascal) {
-            System.out.println(line);
+            System.out.println(line.toString().replaceAll("[\\[\\],]", ""));
         }
     }    
 

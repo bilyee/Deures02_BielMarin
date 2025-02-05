@@ -176,7 +176,26 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraArrayParaulesAmbA
      */
     public static void filtraArrayParaulesAmbA() {
+        System.out.println("Escriu 5 paraules separades per ',' o ', ': ");
+        String input = scanner.nextLine();
 
+        String[] paraules = input.replace(", ", ",").split(",");
+        int count = 0;
+        for (String p : paraules) {
+            if (p.toLowerCase().startsWith("a")) {
+                count++;
+            }
+        }
+
+        String[] filtrades = new String[count];
+        int index = 0;
+        for (String p : paraules) {
+            if (p.toLowerCase().startsWith("a")) {
+                filtrades[index++] = p;
+            }
+        }
+        String rst = String.join(",", filtrades);
+        System.out.println("Paraules que començen amb 'a': " + rst);
     }
        
     /**
@@ -192,7 +211,21 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraLlistaParaulesAmbA
      */
     public static void filtraLlistaParaulesAmbA() {
+        System.out.println("Escriu 5 paraules separades per ',' o ', ': ");
+        String input = scanner.nextLine();
 
+        String[] paraulesArray = input.replace(", ", ",").split(",");
+        ArrayList<String> paraules = new ArrayList<>(Arrays.asList(paraulesArray));
+        ArrayList<String> filtrades = new ArrayList<>();
+
+        for (String p : paraules) {
+            if (p.toLowerCase().startsWith("a")) {
+                filtrades.add(p);
+            }
+        }
+
+        String rst = String.join(", ", filtrades);
+        System.out.println("Paraules que comencen amb 'a': " + rst);
     }
 
     /**
@@ -204,7 +237,11 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraArrayDecimals
      */
     public static double[] generaArrayDecimals(int mida) {
-        double[] rst = new double[0];
+        double[] rst = new double[mida];
+        Random random = new Random();
+        for (int i = 0; i < mida; i++) {
+            rst[i] = random.nextDouble() * 100;
+        }
         return rst;
     }
 
