@@ -448,6 +448,16 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testInvertirMapaClauValor
      */
     public static void invertirMapaClauValor() {
+        HashMap<String, Integer> mapa = new HashMap<>();
+        mapa.put("A", 1);
+        mapa.put("B", 2);
+        mapa.put("C", 3);
+        HashMap<Integer, String> invertir = new HashMap<>();
+        for (Map.Entry<String, Integer> e : mapa.entrySet()) {
+            invertir.put(e.getValue(), e.getKey());
+        }
+        System.out.println("Mapa original: " + mapa);
+        System.out.println("Mapa invertit: " + invertir);
 
     }
 
@@ -468,7 +478,19 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFusionarMapesSumantValors
      */
     public static void fusionarMapesSumantValors() {
+        HashMap<String, Integer> mapa1 = new HashMap<>();
+        mapa1.put("X", 10);
+        mapa1.put("Y", 20);
 
+        HashMap<String, Integer> mapa2 = new HashMap<>();
+        mapa2.put("Y", 5);
+        mapa2.put("Z", 15);
+
+        HashMap<String, Integer> fusionar = new HashMap<>(mapa1);
+        for (Map.Entry<String, Integer> e : mapa2.entrySet()) {
+            fusionar.put(e.getKey(), fusionar.getOrDefault(e.getKey(), 0) + e.getValue());
+        }
+        System.out.println("Mapa fusionat: " + fusionar);
     }
 
     /**
@@ -484,7 +506,12 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testOrdenarMapaPerClaus
      */
     public static void ordenarMapaPerClaus() {
-
+        HashMap<String, Integer> elements = new HashMap<>();
+        elements.put("Banana", 3);
+        elements.put("Poma", 5);
+        elements.put("Taronja", 2);
+        TreeMap<String, Integer> ordenar = new TreeMap<>(elements);
+        System.out.println("Mapa ordenar per claus: " + ordenar);
     }
 
     /**
@@ -500,6 +527,26 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testCalcularEstadistiquesNotesEstudiants
      */
     public static void calcularEstadistiquesNotesEstudiants() {
+        double maximo = Integer.MIN_VALUE;
+        double minimo = Integer.MAX_VALUE;
+        double total = 0.0;
 
+        HashMap<String, Double> alumnosNotas = new HashMap<>();
+        alumnosNotas.put("Paco", 7.7);
+        alumnosNotas.put("Juanjo", 8.0);
+        alumnosNotas.put("Biel", 9.4);
+
+        for (double nota : alumnosNotas.values()) {
+            total += nota;
+            if (nota > maximo) {
+                maximo = nota;
+            }
+            if (nota < minimo) {
+                minimo = nota;
+            }
+        }
+
+        double media = total / alumnosNotas.size();
+        System.out.println("Mitjana: [" + media + "], Màxim: [" + maximo + "], Mínim: [" + minimo + "]");
     }
 }
