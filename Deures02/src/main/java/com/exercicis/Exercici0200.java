@@ -309,7 +309,7 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0200#testMinMaxAddWithDuplicates
      */
     public static ArrayList<Integer> minMaxAdd(ArrayList<Integer> nums) {
-        Collections.sort(nums);
+        nums.sort((a, b) -> a.compareTo(b)); // Comparamos numero por numero para saber los minimos y los maximos
         int minSum = nums.get(0) + nums.get(1) + nums.get(2) + nums.get(3);
         int maxSum = nums.get(1) + nums.get(2) + nums.get(3) + nums.get(4);
         return new ArrayList<>(Arrays.asList(minSum, maxSum));
