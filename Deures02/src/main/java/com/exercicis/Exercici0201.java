@@ -184,7 +184,7 @@ public class Exercici0201 {
      */
     public static void filtraArrayParaulesAmbA() {
         // Introducimos las 5 palabras con separacion
-        System.out.println("Escriu 5 paraules separades per ',' o ', ': ");
+        System.out.println("Escriu 5 paraules separades per ',' o ', ':");
         String input = scanner.nextLine();
 
         // Remplacamos y dividimos las comas con separacion por comas normales
@@ -208,8 +208,8 @@ public class Exercici0201 {
                 filtrades[index++] = p; // Si la palabra empieza por 'a', la almacenamos en el Array
             }
         }
-        String rst = String.join(",", filtrades); // Unimos las palabras en el Array con un ',' de separador
-        System.out.println("Paraules que començen amb 'a': " + rst); // Mostramos las palabras
+        String rst = String.join(", ", filtrades); // Unimos las palabras en el Array con un ',' de separador
+        System.out.println("Paraules que comencen amb 'a': " + rst); // Mostramos las palabras
     }
        
     /**
@@ -226,7 +226,7 @@ public class Exercici0201 {
      */
     public static void filtraLlistaParaulesAmbA() {
         // Introducimos las 5 palabras con separacion
-        System.out.println("Escriu 5 paraules separades per ',' o ', ': ");
+        System.out.println("Escriu 5 paraules separades per ',' o ', ':");
         String input = scanner.nextLine();
 
         // Remplazamos y dividimos las comas por separacion por comas normales
@@ -422,7 +422,7 @@ public class Exercici0201 {
      */
     public static void mostrarFrecuenciaParaules() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Introdueix una frase: "); // Introducimos una frase
+        System.out.print("Introdueix una frase: "); // Introducimos una frase
         String input = scanner.nextLine().trim();
         String[] paraules = input.split("\\s+"); // Separamos las palabras y las almacenamos en el Array
 
@@ -511,7 +511,7 @@ public class Exercici0201 {
         elements.put("Poma", 5);
         elements.put("Taronja", 2);
         TreeMap<String, Integer> ordenar = new TreeMap<>(elements);
-        System.out.println("Mapa ordenar per claus: " + ordenar);
+        System.out.println("Mapa ordenat per claus: " + ordenar);
     }
 
     /**
@@ -532,9 +532,9 @@ public class Exercici0201 {
         double total = 0.0;
 
         HashMap<String, Double> alumnosNotas = new HashMap<>();
-        alumnosNotas.put("Paco", 7.7);
-        alumnosNotas.put("Juanjo", 8.0);
-        alumnosNotas.put("Biel", 9.4);
+        alumnosNotas.put("Anna", 8.5);
+        alumnosNotas.put("Joan", 6.0);
+        alumnosNotas.put("Marc", 7.5);
 
         for (double nota : alumnosNotas.values()) {
             total += nota;
@@ -547,6 +547,6 @@ public class Exercici0201 {
         }
 
         double media = total / alumnosNotas.size();
-        System.out.println("Mitjana: [" + media + "], Màxim: [" + maximo + "], Mínim: [" + minimo + "]");
+        System.out.println("Mitjana: " + media + ", Màxim: " + maximo + ", Mínim: " + minimo);
     }
 }
