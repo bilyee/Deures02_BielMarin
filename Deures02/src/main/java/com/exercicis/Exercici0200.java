@@ -338,11 +338,15 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0200#testSumaSenseSumarLargeNumbers
      */
     public static int sumaSenseSumar(int a, int b) {
-        String aR = "x".repeat(a); // Ponemos tantas "x" como cantidad sea
-        String bR = "y".repeat(b); // Ponemos tantas "y" como cantidad sea
-        Integer suma = aR.concat(bR).length(); // Concatenamos las dos sentencias de caracteres y calculamos su longitud
+        String s1 = "x".repeat(a); // Ponemos tantas "x" como cantidad sea
+        String s2 = "y".repeat(b); // Ponemos tantas "y" como cantidad sea
+        Integer resultat = s1.concat(s2).length(); // Concatenamos las dos sentencias de caracteres y calculamos su longitud
         
-        return suma; // Regresamos la suma
+        if ((a < 0 && b >= 0) || (a >= 0 && b < 0)) {
+            resultat = Math.max(s1.length(), s2.length()) - Math.min(s1.length(), s2.length());
+        }
+        
+        return (a < 0 || b < 0) ? -resultat : resultat;
     }
 
     /**
